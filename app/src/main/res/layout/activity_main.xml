@@ -19,7 +19,7 @@
             android:layout_height="72dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="24dp"
-            android:src="@drawable/logo" />
+            android:src="@drawable/aidbox" />
 
         <!-- Email Label -->
         <com.google.android.material.textfield.TextInputLayout
@@ -45,6 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:focusable="true"
             android:textColorHint="@color/white">
 
             <EditText
@@ -63,6 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
+            android:focusable="true"
             android:background="@drawable/button_drawable"
             android:padding="12dp"
             android:text="Login"
