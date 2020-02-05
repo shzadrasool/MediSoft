@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 public class UserShared {
 
+    private String name;
     private String contact;
     private String password;
 
@@ -22,18 +23,26 @@ public class UserShared {
     }
 
 
+    public void setName(String name) {
+        sharedPreferences.edit().putString("name", name).apply();
+        this.name = name;
+    }
+
+    public String getName() {
+        name = sharedPreferences.getString("name", "");
+        return name;
+    }
+
+    public void setContact(String contact) {
+        sharedPreferences.edit().putString("con", contact).apply();
+        this.contact = contact;
+    }
+
     public String getContact() {
+        contact = sharedPreferences.getString("con", "");
         return contact;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-
-    public void setContact(String contact) {
-        this.contact = contact;
-    }
 
     public void setPassword(String password) {
         this.password = password;

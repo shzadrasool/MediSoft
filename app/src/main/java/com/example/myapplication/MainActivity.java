@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     EditText et_contact;
     EditText et_pass;
     LinearLayout linearLayout;
+    String name, con;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +62,13 @@ public class MainActivity extends AppCompatActivity {
         final UserShared userShared = new UserShared(MainActivity.this);
 
 
-//        if (!userShared.getContact().equals("")) {
-//            // loginProcess(em,pass);
-//            Intent intent = new Intent(MainActivity.this, navigation_activity.class);
-//            intent.putExtra("contact", userShared.getContact());
-//            startActivity(intent);
-//        }
+        if (!userShared.getContact().equals("")) {
+            // loginProcess(em,pass);
+            Intent intent = new Intent(MainActivity.this, navigation_activity.class);
+            intent.putExtra("contact", userShared.getContact());
+            startActivity(intent);
+            finish();
+        }
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,17 +83,12 @@ public class MainActivity extends AppCompatActivity {
                     et_pass.setError("Enter Password");
                 } else {
                     loginProcess(email, password);
-
                 }
             }
         });
 
 
-        if (!isConnectedToInternet(MainActivity.this)) {
-            Snackbar snackbar = Snackbar.make(linearLayout, "Can't connect to Internet!", Snackbar.LENGTH_LONG);
-            snackbar.show();
-            //  Toast.makeText(MainActivity.this, "Can't connect to Internet!", Toast.LENGTH_SHORT).show();
-        }
+
 
 
     }
@@ -112,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
         RequestInterface requestInterface = retrofit.create(RequestInterface.class);
 
-        User user = new User();
+        final User user = new User();
         user.setUserContact(contact);
         user.setUserPassword(password);
         ServerRequest request = new ServerRequest();
@@ -126,21 +123,22 @@ public class MainActivity extends AppCompatActivity {
 
                 ServerResponse resp = response.body();
 
+                assert resp != null;
+                User user = resp.getUser();
+                name = user.getUserName();
+                con = user.getUserContact();
+
                 Toast.makeText(MainActivity.this, "" + resp.getMessage(), Toast.LENGTH_SHORT).show();
 
                 if (resp.getResult().equals(Constants.SUCCESS)) {
-                    UserShared user = new UserShared(MainActivity.this);
-                    user.setContact(contact);
-                    user.setPassword(password);
-                    String con;
-                    con = user.getContact();
+                    UserShared userShared = new UserShared(MainActivity.this);
+                    userShared.setName(name);
+                    userShared.setContact(con);
                     Intent intent = new Intent(MainActivity.this, navigation_activity.class);
-                    intent.putExtra("contact", contact);
-                    intent.putExtra("password", password);
+                    intent.putExtra("name", name);
+                    intent.putExtra("con", con);
                     startActivity(intent);
                     finish();
-
-//                    startActivity(new Intent(getApplicationContext(), TeacherPanel.class));
 
                 }
 
@@ -159,5 +157,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
 }

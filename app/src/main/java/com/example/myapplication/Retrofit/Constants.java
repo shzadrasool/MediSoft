@@ -6,6 +6,8 @@ public class Constants {
 
 
     public static final String LOG_IN = "login";
+    public static final String SIGN_UP = "register";
+
     public static final String SUCCESS = "Success";
     public static final String TAG = "Invalid User or Pass!";
 
