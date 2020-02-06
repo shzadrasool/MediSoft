@@ -1,7 +1,5 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -12,16 +10,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.Retrofit.Constants;
 import com.example.myapplication.Retrofit.RequestInterface;
 import com.example.myapplication.Retrofit.ServerRequest;
 import com.example.myapplication.Retrofit.ServerResponse;
-import com.google.android.material.snackbar.Snackbar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -123,14 +120,14 @@ public class MainActivity extends AppCompatActivity {
 
                 ServerResponse resp = response.body();
 
-                assert resp != null;
-                User user = resp.getUser();
-                name = user.getUserName();
-                con = user.getUserContact();
+
 
                 Toast.makeText(MainActivity.this, "" + resp.getMessage(), Toast.LENGTH_SHORT).show();
 
                 if (resp.getResult().equals(Constants.SUCCESS)) {
+                    User user = resp.getUser();
+                    name = user.getUserName();
+                    con = user.getUserContact();
                     UserShared userShared = new UserShared(MainActivity.this);
                     userShared.setName(name);
                     userShared.setContact(con);
