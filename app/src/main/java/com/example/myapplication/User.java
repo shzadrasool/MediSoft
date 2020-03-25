@@ -6,6 +6,11 @@ public class User {
     private String userName;
     private String userContact;
     private String userPassword;
+    private String uid;
+
+    public String getUid() {
+        return uid;
+    }
 
     public String getUserName() {
         return userName;

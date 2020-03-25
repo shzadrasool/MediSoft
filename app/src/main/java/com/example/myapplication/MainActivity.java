@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     EditText et_contact;
     EditText et_pass;
     LinearLayout linearLayout;
-    String name, con;
+    String name, con, user_uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +54,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        if (isNetwork(getApplicationContext())) {
+
+            Toast.makeText(getApplicationContext(), "Internet Connected", Toast.LENGTH_SHORT).show();
+
+        } else {
+
+            Toast.makeText(getApplicationContext(), "Internet Is Not Connected", Toast.LENGTH_SHORT).show();
+        }
 
         //validateUser();
         final UserShared userShared = new UserShared(MainActivity.this);
@@ -90,11 +98,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private boolean isConnectedToInternet(Context context) {
-        ConnectivityManager cm =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+    public boolean isNetwork(Context context) {
+
+        ConnectivityManager cm = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        return netInfo != null && netInfo.isConnectedOrConnecting();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        }
+        return false;
     }
 
     private void loginProcess(final String contact, final String password) {
@@ -128,12 +140,16 @@ public class MainActivity extends AppCompatActivity {
                     User user = resp.getUser();
                     name = user.getUserName();
                     con = user.getUserContact();
+                    user_uid = user.getUid();
                     UserShared userShared = new UserShared(MainActivity.this);
                     userShared.setName(name);
                     userShared.setContact(con);
+                    userShared.setUser_uid(user_uid);
+                    Toast.makeText(MainActivity.this, user_uid, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this, navigation_activity.class);
                     intent.putExtra("name", name);
                     intent.putExtra("con", con);
+                    intent.putExtra("user_uid", user_uid);
                     startActivity(intent);
                     finish();
 
