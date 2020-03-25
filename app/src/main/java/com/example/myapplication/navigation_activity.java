@@ -22,7 +22,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 
 public class navigation_activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -30,6 +29,7 @@ public class navigation_activity extends AppCompatActivity implements Navigation
     TextView name, contact;
     String user_name, user_con;
     private static View view;
+    Context context;
 
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -45,7 +45,8 @@ public class navigation_activity extends AppCompatActivity implements Navigation
         initViews();
 
         if (!isConnectedToInternet(navigation_activity.this)) {
-            Snackbar.make(view, "Can't connect to Internet!", Snackbar.LENGTH_LONG).show();
+            Toast.makeText(this, "Can't connect to Internet!", Toast.LENGTH_SHORT).show();
+            // Snackbar.make(context, "Can't connect to Internet!", Snackbar.LENGTH_LONG).show();
         }
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

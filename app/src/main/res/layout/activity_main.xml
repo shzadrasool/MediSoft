@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:theme="@style/myTextInputLabel"
             android:textColorHint="@color/white">
 
             <EditText
@@ -48,7 +49,9 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:textColorHint="@color/white"
-            app:passwordToggleEnabled="true">
+            app:passwordToggleEnabled="true"
+            android:theme="@style/myTextInputLabel"
+            app:passwordToggleTint="@color/offwhite">
 
             <EditText
                 android:id="@+id/input_password"

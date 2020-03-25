@@ -10,6 +10,7 @@ import android.provider.OpenableColumns;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -41,11 +42,11 @@ public class order_image extends AppCompatActivity {
 
     Button btn_order;
     ImageButton order_image;
+    EditText et_address, et_extras;
 
     String user_uid;
 
 
-    String picname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +54,10 @@ public class order_image extends AppCompatActivity {
 
         setContentView(R.layout.activity_order_image);
 
-        initViewSupplier();
+        initView();
 
         UserShared userShared = new UserShared(order_image.this);
         user_uid = userShared.getUser_uid();
-
-        Toast.makeText(this, "User id is:" + user_uid, Toast.LENGTH_SHORT).show();
 
         order_image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,11 +72,17 @@ public class order_image extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (checkStatus == 1) {
-                    addOrder();
 
-                } else if (checkStatus == 0) {
-                    Toast.makeText(order_image.this, "Please select image first!", Toast.LENGTH_SHORT).show();
+                if (et_address.getText().toString().length() == 0) {
+                    et_address.setError("Address is required");
+                } else {
+                    if (checkStatus == 1) {
+
+                        addOrder();
+
+                    } else if (checkStatus == 0) {
+                        Toast.makeText(order_image.this, "Please select image first!", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
 
@@ -86,17 +91,21 @@ public class order_image extends AppCompatActivity {
     }
 
 
-    private void initViewSupplier() {
+    private void initView() {
 
         order_image = findViewById(R.id.order_pic);
         btn_order = findViewById(R.id.send_order);
+        et_address = findViewById(R.id.et_address);
+        et_extras = findViewById(R.id.et_extra);
+
+
+
 
     }
 
     private void openFileChooser() {
         CropImage.activity().setGuidelines(CropImageView.Guidelines.ON)
                 .start(this);
-        checkStatus = 1;
 
     }
 
@@ -175,14 +184,13 @@ public class order_image extends AppCompatActivity {
         final mPic mpic = new mPic();
         final String image = imageToString();
 
-        // Toast.makeText(this, "Image Name is: " + image, Toast.LENGTH_LONG).show();
 
-
-        mpic.setPicName(file_name);
-
-        //error
-        mpic.setImage_code(image);
         mpic.setUser_uid(user_uid);
+        mpic.setAddress(et_address.getText().toString());
+        mpic.setExtras(et_extras.getText().toString());
+        mpic.setPicName(file_name);
+        mpic.setImage_code(image);
+
 
         ServerRequest request = new ServerRequest();
         request.setOperation(Constants.UPLOAD_PIC);

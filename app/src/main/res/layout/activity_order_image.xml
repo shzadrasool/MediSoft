@@ -6,64 +6,77 @@
 
     >
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:weightSum="12"
-        android:padding="16dp">
+        android:layout_height="match_parent">
 
-        <ImageButton
-            android:id="@+id/order_pic"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="6"
-            android:background="@color/white"
-            android:src="@drawable/select_image"
-            android:scaleType="centerInside"
-            android:elevation="5dp" />
-
-        <EditText
-            android:id="@+id/et_address"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="20dp"
-            android:hint="Enter Address"
-
-            />
-
-        <EditText
-            android:id="@+id/et_extra"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"
-            android:layout_marginTop="20dp"
-            android:hint="Enter Extra Details"
-            android:ems="10"
-            android:inputType="textMultiLine"
-            android:isScrollContainer="true"
-            android:enabled="true"
-            android:minLines="6"
-            android:maxLines="6"
-
-            />
-
-        <Button
-            android:id="@+id/send_order"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="Send Order"
-            android:textSize="16sp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
             android:gravity="center"
-            android:layout_margin="40dp"
-            android:background="@drawable/button_drawable"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
+            android:padding="16dp"
+            android:scrollbars="vertical"
+            android:layout_gravity="center">
+
+            <ImageButton
+                android:id="@+id/order_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="250dp"
+                android:background="@color/white"
+                android:src="@drawable/select_image"
+                android:scaleType="centerCrop"
+                android:elevation="5dp" />
+
+            <EditText
+                android:id="@+id/et_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:hint="Enter Address"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical"
+                android:gravity="top|left"
+                android:lines="4"
+                android:focusable="true"
+                android:minLines="1"
+                android:maxLines="3"
+
+                />
+
+            <EditText
+                android:id="@+id/et_extra"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint=" Enter Extra Details \n Nearby Landmark \n Count of medicine dose etc."
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:focusable="true"
+                android:scrollbars="vertical"
+                android:gravity="bottom|left"
+                android:lines="4"
+                android:minLines="1"
+                android:maxLines="3"
+
+                />
+
+            <Button
+                android:id="@+id/send_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Send Order"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:focusable="true"
+                android:layout_margin="40dp"
+                android:background="@drawable/button_drawable"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
 
-    </LinearLayout>
+        </LinearLayout>
 
+    </ScrollView>
 </LinearLayout>
+
