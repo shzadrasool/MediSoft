@@ -28,7 +28,7 @@
             app:cardCornerRadius="5dp">
 
             <ImageButton
-                android:id="@+id/image"
+                android:id="@+id/img_place_order"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:src="@drawable/drug"

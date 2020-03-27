@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
     >
 
     <ScrollView
@@ -25,34 +24,46 @@
                 android:layout_height="250dp"
                 android:background="@color/white"
                 android:src="@drawable/select_image"
+                android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
                 android:elevation="5dp" />
 
-            <EditText
-                android:id="@+id/et_address"
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:hint="Enter Address"
-                android:inputType="textMultiLine"
-                android:scrollbars="vertical"
-                android:gravity="top|left"
-                android:lines="4"
-                android:focusable="true"
-                android:minLines="1"
-                android:maxLines="3"
+                android:layout_marginBottom="20dp"
+                android:textColorHint="@color/hint">
 
-                />
+                <EditText
+                    android:id="@+id/et_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Address"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"
+                    android:textColorHint="@color/hint"
+                    android:gravity="top|left"
+                    android:lines="4"
+                    android:focusable="true"
+                    android:minLines="1"
+                    android:maxLines="3"
+
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <EditText
                 android:id="@+id/et_extra"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:hint=" Enter Extra Details \n Nearby Landmark \n Count of medicine dose etc."
+                android:hint=" Enter Nearby Landmark or \n Count of medicine dose etc."
                 android:ems="10"
                 android:inputType="textMultiLine"
                 android:focusable="true"
+                android:textColorHint="@color/hint"
                 android:scrollbars="vertical"
                 android:gravity="bottom|left"
                 android:lines="4"

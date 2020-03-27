@@ -11,13 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.myapplication.Make_order;
 import com.example.myapplication.R;
 import com.example.myapplication.order_image;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
-    ImageButton btn_image;
+    ImageButton btn_image, btn_placeOrder;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -26,10 +27,21 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         btn_image = root.findViewById(R.id.image_btn);
+        btn_placeOrder = root.findViewById(R.id.img_place_order);
+
 
         btn_image.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), order_image.class);
+                startActivity(intent);
+
+            }
+
+        });
+
+        btn_placeOrder.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Make_order.class);
                 startActivity(intent);
 
             }
