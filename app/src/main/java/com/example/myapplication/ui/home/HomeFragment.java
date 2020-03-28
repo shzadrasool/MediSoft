@@ -2,11 +2,14 @@ package com.example.myapplication.ui.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,6 +31,7 @@ import com.example.myapplication.order_image;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,6 +55,7 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
     List<medi> mediListCommon;
     Context context;
+    RelativeLayout rv;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -60,8 +65,13 @@ public class HomeFragment extends Fragment {
 
         btn_image = root.findViewById(R.id.image_btn);
         btn_placeOrder = root.findViewById(R.id.img_place_order);
+        rv = (RelativeLayout) root.findViewById(R.id.r_layout);
         recyclerView = root.findViewById(R.id.rv_View);
         getCommonMedicines();
+
+        if (!isConnectedToInternet(Objects.requireNonNull(getContext()))) {
+            setLayoutVisible();
+        }
 
 
         btn_image.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +96,18 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
+    public void setLayoutVisible() {
+        if (rv.getVisibility() == View.GONE) {
+            rv.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private boolean isConnectedToInternet(Context context) {
+        ConnectivityManager cm =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
     private void getCommonMedicines() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
