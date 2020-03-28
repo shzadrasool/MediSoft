@@ -18,53 +18,43 @@ import com.example.myapplication.R;
 import com.example.myapplication.Retrofit.ItemClickListener;
 import com.example.myapplication.model_classes.medi;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
-public class AdapterMedi extends RecyclerView.Adapter<AdapterMedi.RecyclerViewAdapter> {
+public class AdapterCommonMedi extends RecyclerView.Adapter<AdapterCommonMedi.RecyclerViewAdapter> {
 
     Context context;
-    List<medi> mediAdapter;
+    List<medi> mediCommonAdapter;
     String type;
     String clickedId;
 
-    public static class numbers {
-        public ArrayList<Integer> listOfId = new ArrayList<Integer>();
-
-        public numbers() {
-            listOfId = new ArrayList<Integer>();
-            //AdapterMedi  listOfId.add(clickedId);
-        }
-
-        public List<Integer> getList() {
-            return listOfId;
-        }
-    }
-
-    public AdapterMedi(Context context, List<medi> mediAdapter) {
+    public AdapterCommonMedi(Context context, List<medi> mediCommonAdapter) {
         this.context = context;
-        this.mediAdapter = mediAdapter;
+        this.mediCommonAdapter = mediCommonAdapter;
     }
-
 
     @NonNull
     @Override
-    public RecyclerViewAdapter onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public AdapterCommonMedi.RecyclerViewAdapter onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.recycle_item_show_medi, viewGroup, false);
-        return new AdapterMedi.RecyclerViewAdapter(view);
+        context = viewGroup.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
+
+        // Inflate the custom layout
+        View view = inflater.inflate(R.layout.layout_rv_card, viewGroup, false);
+
+        // View view = LayoutInflater.from(context).inflate(R.layout.layout_rv_card, viewGroup, false);
+        return new AdapterCommonMedi.RecyclerViewAdapter(view);
     }
 
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerViewAdapter recyclerViewAdapter, int position) {
-        final medi currentitem = mediAdapter.get(position);
+        final medi currentitem = mediCommonAdapter.get(position);
         recyclerViewAdapter.mediName.setText(currentitem.getMediName());
         recyclerViewAdapter.mediMg.setText(currentitem.getMediMg());
         recyclerViewAdapter.mediPrice.setText(currentitem.getMediPrice() + " PKR");
         recyclerViewAdapter.mediType.setText(currentitem.getMediType());
-
 
         type = currentitem.getMediType();
 
@@ -81,7 +71,7 @@ public class AdapterMedi extends RecyclerView.Adapter<AdapterMedi.RecyclerViewAd
         recyclerViewAdapter.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, final int position, boolean isLongClick) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                 ;
                 builder.setTitle("Confirm:");
                 builder.setMessage("Do you want to add to order!");
@@ -91,11 +81,7 @@ public class AdapterMedi extends RecyclerView.Adapter<AdapterMedi.RecyclerViewAd
                         recyclerViewAdapter.getAdapterPosition();
                         dialog.dismiss();
 
-
                         clickedId = currentitem.getMid();
-                        // listOfId.add(clickedId);
-
-
 
                         Toast.makeText(context, clickedId, Toast.LENGTH_SHORT).show();
 
@@ -118,7 +104,7 @@ public class AdapterMedi extends RecyclerView.Adapter<AdapterMedi.RecyclerViewAd
 
     @Override
     public int getItemCount() {
-        return mediAdapter.size();
+        return mediCommonAdapter.size();
     }
 
     public class RecyclerViewAdapter extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
@@ -130,13 +116,14 @@ public class AdapterMedi extends RecyclerView.Adapter<AdapterMedi.RecyclerViewAd
 
         public RecyclerViewAdapter(@NonNull View itemView) {
             super(itemView);
-            mid = itemView.findViewById(R.id.mediId);
-            mediName = itemView.findViewById(R.id.mediName);
-            mediMg = itemView.findViewById(R.id.mediMg);
-            mediType = itemView.findViewById(R.id.mediType);
-            mediPrice = itemView.findViewById(R.id.mediPrice);
-            cardView = itemView.findViewById(R.id.cardview);
-            imgMedi = itemView.findViewById(R.id.mediImg);
+
+            mid = itemView.findViewById(R.id.tv_mid);
+            mediName = itemView.findViewById(R.id.tv_mediName);
+            mediMg = itemView.findViewById(R.id.tv_mg);
+            mediType = itemView.findViewById(R.id.tv_type);
+            mediPrice = itemView.findViewById(R.id.tv_price);
+            cardView = itemView.findViewById(R.id.cv_card);
+            imgMedi = itemView.findViewById(R.id.img_medi);
             mediType.setVisibility(View.GONE);
             itemView.setOnLongClickListener(this);
             itemView.setOnClickListener(this);
@@ -158,8 +145,6 @@ public class AdapterMedi extends RecyclerView.Adapter<AdapterMedi.RecyclerViewAd
 
         }
     }
-
-
 
 }
 

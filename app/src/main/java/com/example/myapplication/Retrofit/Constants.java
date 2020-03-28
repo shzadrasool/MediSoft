@@ -9,6 +9,7 @@ public class Constants {
     public static final String SIGN_UP = "register";
     public static final String UPLOAD_PIC = "upload";
     public static final String GET_MEDICINES = "get_medicines";
+    public static final String GET_COMMONMEDI = "get_common";
 
     public static final String SUCCESS = "Success";
     public static final String TAG = "Invalid User or Pass!";

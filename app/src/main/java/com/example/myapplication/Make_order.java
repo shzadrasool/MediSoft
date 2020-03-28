@@ -1,6 +1,11 @@
 package com.example.myapplication;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,21 +43,50 @@ public class Make_order extends AppCompatActivity {
     ArrayList<String> mediType;
     RecyclerView recyclerView;
     List<medi> mediList;
+    RelativeLayout rv;
+
+
+    private AdapterMedi.numbers number;
+
+    //example
+
+
+    //hurray !
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_make_order);
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        number = new AdapterMedi.numbers();
+        List<Integer> list = number.getList();
 
-        setContentView(R.layout.activity_make_order);
+        rv = (RelativeLayout) findViewById(R.id.r_layout);
         recyclerView = findViewById(R.id.recyclerView);
         getMedicines();
 
+        if (!isConnectedToInternet(Make_order.this)) {
+            setLayoutVisible();
+        }
 
+
+    }
+
+    public void setLayoutVisible() {
+        if (rv.getVisibility() == View.GONE) {
+            rv.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private boolean isConnectedToInternet(Context context) {
+        ConnectivityManager cm =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
     private void getMedicines() {
@@ -78,7 +112,6 @@ public class Make_order extends AppCompatActivity {
                 mediMg = mediGetAdapter.getMediMg();
                 mediPrice = mediGetAdapter.getMediPrice();
                 mediType = mediGetAdapter.getMediType();
-
 
                 mediList = new ArrayList<>();
                 for (int i = 0; i < mediName.size(); i++) {

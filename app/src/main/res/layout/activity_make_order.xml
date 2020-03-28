@@ -16,11 +16,43 @@
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar" />
+
+    <RelativeLayout
+        android:id="@+id/r_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:gravity="center"
+        android:visibility="gone"
+
+        >
+
+        <ImageView
+            android:id="@+id/noSignal"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:alpha="0.8"
+            android:src="@drawable/no_signal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Something went wrong!"
+            android:layout_marginTop="10dp"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimary"
+            android:alpha="0.8"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/noSignal" />
+    </RelativeLayout>
+
 
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.example.myapplication.Retrofit;
 
 import com.example.myapplication.User;
+import com.example.myapplication.adapters.MediCommonGetAdapter;
 import com.example.myapplication.adapters.MediGetAdapter;
 import com.example.myapplication.model_classes.mPic;
 
@@ -10,9 +11,14 @@ public class ServerResponse {
     private User user;
     private mPic m;
     private MediGetAdapter mediGetAdapter;
+    private MediCommonGetAdapter mediGetCommonAdapter;
 
     public MediGetAdapter getMediGetAdapter() {
         return mediGetAdapter;
+    }
+
+    public MediCommonGetAdapter getMediGetCommonAdapter() {
+        return mediGetCommonAdapter;
     }
 
     public User getUser() {
