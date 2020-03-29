@@ -17,11 +17,13 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.myapplication.Retrofit.Constants;
 import com.example.myapplication.Retrofit.RequestInterface;
 import com.example.myapplication.Retrofit.ServerRequest;
 import com.example.myapplication.Retrofit.ServerResponse;
+import com.example.myapplication.adapters.AdapterMedi;
 import com.example.myapplication.model_classes.mPic;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -34,7 +36,7 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class order_image extends AppCompatActivity {
+public class Order_image extends AppCompatActivity {
 
     private static final int IMG_REQUEST = 777;
     String file_name;
@@ -55,9 +57,13 @@ public class order_image extends AppCompatActivity {
 
         setContentView(R.layout.activity_order_image);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
         initView();
 
-        UserShared userShared = new UserShared(order_image.this);
+        UserShared userShared = new UserShared(Order_image.this);
         user_uid = userShared.getUser_uid();
 
         order_image.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +88,7 @@ public class order_image extends AppCompatActivity {
                         addOrder();
 
                     } else if (checkStatus == 0) {
-                        Toast.makeText(order_image.this, "Please select image first!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Order_image.this, "Please select image first!", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -91,6 +97,19 @@ public class order_image extends AppCompatActivity {
         });
     }
 
+    public void goBack(View view) {
+        Intent intent = new Intent(Order_image.this, navigation_activity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        AdapterMedi.listofId.clear();
+        Intent intent = new Intent(Order_image.this, navigation_activity.class);
+        startActivity(intent);
+        finish();
+    }
 
     private void initView() {
 
@@ -207,7 +226,7 @@ public class order_image extends AppCompatActivity {
                 mPic mpic = new mPic();
                 ServerResponse resp = response.body();
 
-                Toast.makeText(order_image.this, resp.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(Order_image.this, resp.getMessage(), Toast.LENGTH_LONG).show();
 
 
                 mpic = resp.getM();
@@ -219,7 +238,7 @@ public class order_image extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ServerResponse> call, Throwable t) {
-                Toast.makeText(order_image.this, "Connection Failure " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(Order_image.this, "Connection Failure " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
         });
 
@@ -227,8 +246,9 @@ public class order_image extends AppCompatActivity {
     }
 
     private void setUpIntent() {
-        Intent intent = new Intent(order_image.this, final_activity.class);
+        Intent intent = new Intent(Order_image.this, final_activity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.animation_enter, R.anim.animation_leave);
         finish();
     }
 

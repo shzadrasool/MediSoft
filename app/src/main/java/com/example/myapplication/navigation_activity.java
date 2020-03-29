@@ -7,8 +7,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +22,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.ui.AppBarConfiguration;
 
+import com.example.myapplication.adapters.AdapterCommonMedi;
 import com.google.android.material.navigation.NavigationView;
 
 public class navigation_activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -28,7 +31,12 @@ public class navigation_activity extends AppCompatActivity implements Navigation
     TextView name, contact;
     String user_name, user_con;
     private static View view;
-    Context context;
+
+    int arraySize;
+    ImageButton mImageBtn;
+    TextView mCountTv;
+    MenuItem mCartIconMenuItem;
+    Context mContext = navigation_activity.this;
 
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -40,6 +48,8 @@ public class navigation_activity extends AppCompatActivity implements Navigation
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        AdapterCommonMedi.listofId.clear();
+
 
         initViews();
 
@@ -56,19 +66,47 @@ public class navigation_activity extends AppCompatActivity implements Navigation
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
-//        NavigationView navigationView = findViewById(R.id.nav_view);
-//        // Passing each menu ID as a set of Ids because each
-//        // menu should be considered as top level destinations.
-//        mAppBarConfiguration = new AppBarConfiguration.Builder(
-//                R.id.nav_home, R.id.nav_orders, R.id.nav_profile,
-//                R.id.nav_signOut)
-//                .setDrawerLayout(drawer)
-//                .build();
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-//        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-//        NavigationUI.setupWithNavController(navigationView, navController);
-
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu, menu);
+        mCartIconMenuItem = menu.findItem(R.id.cart_count_menu_item);
+
+        View actionView = mCartIconMenuItem.getActionView();
+
+        if (actionView != null) {
+            mCountTv = actionView.findViewById(R.id.count_tv_layout);
+            mImageBtn = actionView.findViewById(R.id.image_btn_layout);
+        }
+
+        mImageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mContext, "Image Button is Clicked!", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+        AdapterCommonMedi.listofId.clear();
+        final Handler handler = new Handler();
+        Runnable run = new Runnable() {
+            @Override
+            public void run() {
+                arraySize = AdapterCommonMedi.listofId.size();
+                mCountTv.setText(String.valueOf(arraySize));
+
+                handler.postDelayed(this, 100);
+            }
+
+        };
+        handler.post(run);
+
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
 
     private boolean isConnectedToInternet(Context context) {
         ConnectivityManager cm =
@@ -130,7 +168,9 @@ public class navigation_activity extends AppCompatActivity implements Navigation
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
+
             super.onBackPressed();
+            AdapterCommonMedi.listofId.clear();
             return;
         }
 

@@ -28,19 +28,8 @@ public class AdapterMedi extends RecyclerView.Adapter<AdapterMedi.RecyclerViewAd
     List<medi> mediAdapter;
     String type;
     String clickedId;
+    public static ArrayList<String> listofId = new ArrayList<String>();
 
-    public static class numbers {
-        public ArrayList<Integer> listOfId = new ArrayList<Integer>();
-
-        public numbers() {
-            listOfId = new ArrayList<Integer>();
-            //AdapterMedi  listOfId.add(clickedId);
-        }
-
-        public List<Integer> getList() {
-            return listOfId;
-        }
-    }
 
     public AdapterMedi(Context context, List<medi> mediAdapter) {
         this.context = context;
@@ -82,7 +71,7 @@ public class AdapterMedi extends RecyclerView.Adapter<AdapterMedi.RecyclerViewAd
             @Override
             public void onClick(View view, final int position, boolean isLongClick) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                ;
+
                 builder.setTitle("Confirm:");
                 builder.setMessage("Do you want to add to order!");
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -93,7 +82,8 @@ public class AdapterMedi extends RecyclerView.Adapter<AdapterMedi.RecyclerViewAd
 
 
                         clickedId = currentitem.getMid();
-                        // listOfId.add(clickedId);
+                        listofId.add(clickedId);
+
 
 
 

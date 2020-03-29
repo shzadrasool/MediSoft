@@ -18,6 +18,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.Retrofit.ItemClickListener;
 import com.example.myapplication.model_classes.medi;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,6 +28,7 @@ public class AdapterCommonMedi extends RecyclerView.Adapter<AdapterCommonMedi.Re
     List<medi> mediCommonAdapter;
     String type;
     String clickedId;
+    public static ArrayList<String> listofId = new ArrayList<String>();
 
     public AdapterCommonMedi(Context context, List<medi> mediCommonAdapter) {
         this.context = context;
@@ -82,6 +84,7 @@ public class AdapterCommonMedi extends RecyclerView.Adapter<AdapterCommonMedi.Re
                         dialog.dismiss();
 
                         clickedId = currentitem.getMid();
+                        listofId.add(clickedId);
 
                         Toast.makeText(context, clickedId, Toast.LENGTH_SHORT).show();
 

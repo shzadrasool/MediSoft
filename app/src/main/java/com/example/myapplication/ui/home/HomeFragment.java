@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Make_order;
+import com.example.myapplication.Order_image;
 import com.example.myapplication.R;
 import com.example.myapplication.Retrofit.Constants;
 import com.example.myapplication.Retrofit.RequestInterface;
@@ -27,7 +28,6 @@ import com.example.myapplication.Retrofit.ServerResponse;
 import com.example.myapplication.adapters.AdapterCommonMedi;
 import com.example.myapplication.adapters.MediCommonGetAdapter;
 import com.example.myapplication.model_classes.medi;
-import com.example.myapplication.order_image;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +67,8 @@ public class HomeFragment extends Fragment {
         btn_placeOrder = root.findViewById(R.id.img_place_order);
         rv = (RelativeLayout) root.findViewById(R.id.r_layout);
         recyclerView = root.findViewById(R.id.rv_View);
+        AdapterCommonMedi.listofId.clear();
+
         getCommonMedicines();
 
         if (!isConnectedToInternet(Objects.requireNonNull(getContext()))) {
@@ -76,8 +78,9 @@ public class HomeFragment extends Fragment {
 
         btn_image.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), order_image.class);
+                Intent intent = new Intent(getActivity(), Order_image.class);
                 startActivity(intent);
+                getActivity().finish();
 
             }
 
@@ -86,8 +89,9 @@ public class HomeFragment extends Fragment {
         btn_placeOrder.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), Make_order.class);
-                startActivity(intent);
 
+                startActivity(intent);
+                getActivity().finish();
             }
 
         });
@@ -95,6 +99,7 @@ public class HomeFragment extends Fragment {
 
         return root;
     }
+
 
     public void setLayoutVisible() {
         if (rv.getVisibility() == View.GONE) {

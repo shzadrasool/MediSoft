@@ -1,11 +1,17 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,6 +42,7 @@ import static com.example.myapplication.Retrofit.Constants.BASE_URL;
 public class Make_order extends AppCompatActivity {
 
     AdapterMedi adapter;
+    Toolbar toolbar;
     ArrayList<String> mid;
     ArrayList<String> mediName;
     ArrayList<String> mediMg;
@@ -44,37 +51,88 @@ public class Make_order extends AppCompatActivity {
     RecyclerView recyclerView;
     List<medi> mediList;
     RelativeLayout rv;
+    int arraySize;
 
-
-    private AdapterMedi.numbers number;
-
-    //example
-
-
-    //hurray !
+    ImageButton mImageBtn;
+    TextView mCountTv;
+    MenuItem mCartIconMenuItem;
+    Context mContext = Make_order.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_order);
 
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        number = new AdapterMedi.numbers();
-        List<Integer> list = number.getList();
+        AdapterMedi.listofId.clear();
 
         rv = (RelativeLayout) findViewById(R.id.r_layout);
         recyclerView = findViewById(R.id.recyclerView);
+
         getMedicines();
 
         if (!isConnectedToInternet(Make_order.this)) {
             setLayoutVisible();
         }
 
-
     }
+
+    public void goBack(View view) {
+        Intent intent = new Intent(Make_order.this, navigation_activity.class);
+        startActivity(intent);
+        finish();
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu, menu);
+        mCartIconMenuItem = menu.findItem(R.id.cart_count_menu_item);
+
+        View actionView = mCartIconMenuItem.getActionView();
+
+        if (actionView != null) {
+            mCountTv = actionView.findViewById(R.id.count_tv_layout);
+            mImageBtn = actionView.findViewById(R.id.image_btn_layout);
+        }
+
+        mImageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mContext, "Image Button is Clicked!", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+        final Handler handler = new Handler();
+        Runnable run = new Runnable() {
+            @Override
+            public void run() {
+                arraySize = AdapterMedi.listofId.size();
+                mCountTv.setText(String.valueOf(arraySize));
+
+                handler.postDelayed(this, 100);
+
+            }
+
+        };
+        handler.post(run);
+
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void onBackPressed() {
+        AdapterMedi.listofId.clear();
+        Intent intent = new Intent(Make_order.this, navigation_activity.class);
+        startActivity(intent);
+        finish();
+    }
+
 
     public void setLayoutVisible() {
         if (rv.getVisibility() == View.GONE) {
@@ -131,6 +189,7 @@ public class Make_order extends AppCompatActivity {
     private void setRecyclerView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(Make_order.this));
         adapter = new AdapterMedi(Make_order.this, mediList);
+        adapter.listofId.size();
         recyclerView.setAdapter(adapter);
     }
 }

@@ -20,13 +20,12 @@
 
         <activity android:name=".final_activity" />
         <activity
-            android:name=".order_image"
-            android:parentActivityName=".navigation_activity" />
-        <activity android:name=".Make_order">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".navigation_activity" />
-        </activity>
+            android:name=".Order_image"
+            android:label="" />
+        <activity
+            android:name=".Make_order"
+            android:label="" />
+
 
         <activity
             android:name=".navigation_activity"
