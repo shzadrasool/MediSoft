@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -28,6 +27,8 @@ public class AdapterMedi extends RecyclerView.Adapter<AdapterMedi.RecyclerViewAd
     List<medi> mediAdapter;
     String type;
     String clickedId;
+
+
     public static ArrayList<String> listofId = new ArrayList<String>();
 
 
@@ -84,10 +85,6 @@ public class AdapterMedi extends RecyclerView.Adapter<AdapterMedi.RecyclerViewAd
                         clickedId = currentitem.getMid();
                         listofId.add(clickedId);
 
-
-
-
-                        Toast.makeText(context, clickedId, Toast.LENGTH_SHORT).show();
 
                     }
                 });

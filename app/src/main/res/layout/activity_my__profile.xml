@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/graylight"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradientbackground">
+
+        <ImageView
+            android:id="@+id/img_edit"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:alpha="0.8"
+            android:src="@drawable/edit"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="26dp" />
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:clickable="true"
+                android:alpha="0.9"
+                android:src="@drawable/user" />
+
+            <EditText
+                android:id="@+id/user_name"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Shahzad Rasool"
+                android:inputType="textPersonName"
+                android:gravity="center"
+                android:drawableStart="@drawable/name"
+                android:padding="5dp"
+                android:hint="Enter Name"
+                android:textColorHint="@color/white"
+                android:background="@android:color/transparent"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/user_con"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="03001234567"
+                android:hint="Enter Phone No"
+                android:gravity="center"
+                android:textColorHint="@color/white"
+                android:background="@android:color/transparent"
+                android:drawableStart="@drawable/phone"
+                android:textColor="#fff"
+                android:inputType="number"
+                android:textStyle="bold"
+                android:textSize="18sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/white"
+                app:passwordToggleEnabled="true"
+                android:gravity="center"
+                android:background="@android:color/transparent"
+                android:theme="@style/myTextInputLabel"
+                app:passwordToggleTint="@color/offwhite">
+
+                <EditText
+                    android:id="@+id/user_pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/lock"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:inputType="textPassword"
+                    android:background="@android:color/transparent"
+                    android:maxLength="8"
+                    android:focusable="true"
+                    android:textColor="@color/white" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--            <EditText-->
+            <!--                android:id="@+id/user_pass"-->
+            <!--                android:layout_marginTop="15dp"-->
+            <!--                android:layout_gravity="center_horizontal"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:text="**********"-->
+            <!--                android:drawableLeft="@drawable/lock"-->
+            <!--                android:drawablePadding="15dp"-->
+            <!--                android:textColor="#fff"-->
+            <!--                android:inputType="textPassword"-->
+            <!--                android:background="@android:color/transparent"-->
+            <!--                android:clickable="false"-->
+            <!--                android:textStyle="bold"-->
+            <!--                android:textSize="21sp"/>-->
+
+            <Button
+                android:id="@+id/btn_update"
+                android:textColor="#fff"
+                android:background="@drawable/buttonstyleithgradient"
+                android:layout_marginTop="35dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="Update Info" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

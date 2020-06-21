@@ -8,6 +8,11 @@ public class mPic {
     private String picName;
     private String image_code;
     private String user_uid;
+    private String mid;
+
+    public void setMid(String mid) {
+        this.mid = mid;
+    }
 
     public void setAddress(String address) {
         this.address = address;

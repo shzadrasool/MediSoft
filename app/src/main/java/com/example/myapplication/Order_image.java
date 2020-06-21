@@ -118,9 +118,6 @@ public class Order_image extends AppCompatActivity {
         et_address = findViewById(R.id.et_address);
         et_extras = findViewById(R.id.et_extra);
 
-
-
-
     }
 
     private void openFileChooser() {
@@ -248,7 +245,7 @@ public class Order_image extends AppCompatActivity {
     private void setUpIntent() {
         Intent intent = new Intent(Order_image.this, final_activity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.animation_enter, R.anim.animation_leave);
+        overridePendingTransition(R.anim.animation_leave, R.anim.animation_enter);
         finish();
     }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#E43F3F</color>
-    <color name="colorPrimaryDark">#CC1D1D</color>
+    <color name="colorPrimaryDark">#DA2222</color>
     <color name="colorBackground">#CC1D1D</color>
     <color name="colorAccent">#2C8B60</color>
     <color name="BG">#E43F3F</color>
@@ -10,4 +10,8 @@
     <color name="hint">#3EB178</color>
     <color name="orange">#F19A44</color>
     <color name="blue">#3D9CB4</color>
+    <color name="StartBlue">#E25555</color>
+    <color name="EndBlue">#DA2222</color>
+    <color name="graylight">#B4B6BB</color>
+
 </resources>

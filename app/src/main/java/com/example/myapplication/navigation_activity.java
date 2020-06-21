@@ -29,7 +29,7 @@ public class navigation_activity extends AppCompatActivity implements Navigation
 
 
     TextView name, contact;
-    String user_name, user_con;
+    String user_name, user_con, uid;
     private static View view;
 
     int arraySize;
@@ -127,8 +127,11 @@ public class navigation_activity extends AppCompatActivity implements Navigation
 
 
         UserShared userShared = new UserShared(navigation_activity.this);
+        uid = userShared.getUser_uid();
         user_name = userShared.getName();
         user_con = userShared.getContact();
+
+        Toast.makeText(mContext, "uid is " + uid, Toast.LENGTH_SHORT).show();
 
 
         name.setText(user_name);
@@ -201,11 +204,17 @@ public class navigation_activity extends AppCompatActivity implements Navigation
         return super.onOptionsItemSelected(item);
     }
 
+
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_logout) {
+        if (id == R.id.nav_profile) {
+            Intent intent = new Intent(navigation_activity.this, My_Profile.class);
+            startActivity(intent);
+
+
+        } else if (id == R.id.nav_logout) {
             LogOut(view);
         }
 

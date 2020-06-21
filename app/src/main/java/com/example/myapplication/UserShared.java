@@ -10,6 +10,7 @@ public class UserShared {
     private String password;
     private String user_uid;
 
+
     Context context;
     SharedPreferences sharedPreferences;
 
@@ -23,6 +24,7 @@ public class UserShared {
         sharedPreferences.edit().clear().apply();
     }
 
+
     public void setUser_uid(String user_uid) {
         sharedPreferences.edit().putString("user_uid", user_uid).apply();
         this.user_uid = user_uid;
@@ -32,6 +34,7 @@ public class UserShared {
         user_uid = sharedPreferences.getString("user_uid", "");
         return user_uid;
     }
+
 
     public void setName(String name) {
         sharedPreferences.edit().putString("name", name).apply();

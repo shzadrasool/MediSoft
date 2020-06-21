@@ -16,8 +16,8 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="q">
-
-
+        <activity android:name=".My_Profile"></activity>
+        <activity android:name=".Finalize_Order" />
         <activity android:name=".final_activity" />
         <activity
             android:name=".Order_image"
@@ -25,8 +25,6 @@
         <activity
             android:name=".Make_order"
             android:label="" />
-
-
         <activity
             android:name=".navigation_activity"
             android:label="@string/title_activity_navigation_activity"

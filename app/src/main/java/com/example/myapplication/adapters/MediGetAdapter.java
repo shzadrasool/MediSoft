@@ -10,6 +10,10 @@ public class MediGetAdapter {
     ArrayList<String> mediPrice;
     ArrayList<String> mediType;
 
+    public void setMid(ArrayList<String> mid) {
+        this.mid = mid;
+    }
+
     public ArrayList<String> getMid() {
         return mid;
     }

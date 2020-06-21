@@ -1,7 +1,5 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.Retrofit.Constants;
 import com.example.myapplication.Retrofit.RequestInterface;
@@ -28,6 +28,7 @@ public class sign_up_activity extends AppCompatActivity {
     EditText et_name;
     EditText et_contact;
     EditText et_pass;
+    String nam, con, user_uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,12 +103,14 @@ public class sign_up_activity extends AppCompatActivity {
 
                 if (resp.getResult().equals(Constants.SUCCESS)) {
                     UserShared user = new UserShared(sign_up_activity.this);
-                    user.setName(name);
-                    user.setContact(contact);
+                    user.setName(nam);
+                    user.setContact(con);
+                    user.setUser_uid(user_uid);
 
                     Intent intent = new Intent(sign_up_activity.this, navigation_activity.class);
-                    intent.putExtra("name", name);
-                    intent.putExtra("con", contact);
+                    intent.putExtra("name", nam);
+                    intent.putExtra("con", con);
+                    intent.putExtra("user_uid", user_uid);
                     startActivity(intent);
                     finish();
 
